@@ -4,6 +4,9 @@ FROM node:18-alpine
 # 设置工作目录
 WORKDIR /app
 
+# 设置 npm 配置使用官方仓库
+RUN npm config set registry https://registry.npmjs.org/
+
 # 复制 package.json 和 package-lock.json
 COPY package*.json ./
 
