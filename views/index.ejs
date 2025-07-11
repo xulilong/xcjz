@@ -1,0 +1,184 @@
+<%- include('partials/header') %>
+
+<section class="hero">
+    <h1>西城家长 - 您身边的教育资源专家</h1>
+    <p>深耕西城教育资源，为每个家庭提供专业的教育决策支持</p>
+    <a href="#start" class="cta-button">开启教育之旅</a>
+</section>
+
+<section class="features">
+    <div class="feature-card">
+        <i class="fas fa-school"></i>
+        <h3>幼儿园导航</h3>
+        <p>覆盖西城区122所幼儿园，包含23所示范园，提供详细的园所信息、入园指南和家长评价。<a href="/kindergarten" style="display: block; margin-top: 10px; color: var(--primary-color);">查看详情 →</a></p>
+    </div>
+    <div class="feature-card">
+        <i class="fas fa-users"></i>
+        <h3>家长社区</h3>
+        <p>汇聚万千家长经验，分享教育心得，交流入园技巧，建立互助社群。</p>
+    </div>
+    <div class="feature-card">
+        <i class="fas fa-chart-line"></i>
+        <h3>数据分析</h3>
+        <p>专业的教育数据分析，帮助您了解学区现状，规划子女教育路径。</p>
+    </div>
+</section>
+
+<section class="resources">
+    <div class="resource-card">
+        <div class="resource-image" style="background-image: url('https://via.placeholder.com/400x200')"></div>
+        <div class="resource-content">
+            <span class="premium-tag">精品内容</span>
+            <h3>2025年西城区幼儿园入园全攻略</h3>
+            <p>
+                <strong>招生对象：</strong>2022年8月31日前出生的适龄幼儿（年满三周岁）<br>
+                <strong>报名时间：</strong>截止到2025年6月17日<br>
+                <strong>报名流程：</strong><br>
+                1. 阅读家长须知及操作手册<br>
+                2. 登录平台进行信息采集注册<br>
+                3. 下载打印信息采集表<br>
+                4. 选择1-5所意向幼儿园<br>
+                5. 等待幼儿园审核材料<br>
+                6. 查询预录取结果<br>
+                7. 体检合格后获得正式录取通知<br>
+                <a href="/guide" style="color: var(--primary-color); margin-top: 10px; display: inline-block;">查看完整攻略 →</a>
+            </p>
+        </div>
+    </div>
+    <div class="resource-card">
+        <div class="resource-image" style="background-image: url('https://via.placeholder.com/400x200')"></div>
+        <div class="resource-content">
+            <span class="premium-tag">热门活动</span>
+            <h3>示范园参观日报名</h3>
+            <p>独家组织示范园实地探访，深入了解园所特色和教育理念。</p>
+        </div>
+    </div>
+    <div class="resource-card">
+        <div class="resource-image" style="background-image: url('https://via.placeholder.com/400x200')"></div>
+        <div class="resource-content">
+            <h3>幼小衔接经验分享</h3>
+            <p>资深教育专家分享幼升小准备经验，助力孩子顺利过渡。</p>
+        </div>
+    </div>
+</section>
+
+<style>
+.hero {
+    margin-top: 70px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    padding: 80px 20px;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 1.2em;
+    max-width: 600px;
+    margin: 0 auto 30px;
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 12px 30px;
+    background: white;
+    color: var(--primary-color);
+    text-decoration: none;
+    border-radius: var(--border-radius);
+    font-weight: bold;
+    transition: transform 0.3s;
+}
+
+.cta-button:hover {
+    transform: translateY(-2px);
+}
+
+.features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-bottom: 60px;
+}
+
+.feature-card {
+    background: white;
+    padding: 30px;
+    border-radius: var(--border-radius);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.feature-card i {
+    font-size: 2.5em;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+}
+
+.feature-card h3 {
+    margin-bottom: 15px;
+}
+
+.resources {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-bottom: 60px;
+}
+
+.resource-card {
+    background: white;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+}
+
+.resource-card:hover {
+    transform: translateY(-5px);
+}
+
+.resource-image {
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+}
+
+.resource-content {
+    padding: 20px;
+}
+
+.resource-content h3 {
+    margin-bottom: 10px;
+}
+
+.premium-tag {
+    display: inline-block;
+    background: var(--accent-color);
+    color: white;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 0.8em;
+    margin-bottom: 10px;
+}
+
+@media (max-width: 768px) {
+    .hero {
+        margin-top: 60px;
+        padding: 60px 20px;
+    }
+
+    .hero h1 {
+        font-size: 2em;
+    }
+
+    .features, .resources {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+
+<%- include('partials/footer') %> 

@@ -1,0 +1,164 @@
+<%- include('partials/header') %>
+
+<div class="kindergarten-list">
+    <h1>西城区幼儿园名录</h1>
+    <div class="filters">
+        <select id="typeFilter">
+            <option value="all">全部类型</option>
+            <option value="示范园">示范园</option>
+            <option value="一级园">一级园</option>
+            <option value="二级园">二级园</option>
+        </select>
+        <select id="areaFilter">
+            <option value="all">全部区域</option>
+            <option value="德胜">德胜</option>
+            <option value="什刹海">什刹海</option>
+            <option value="新街口">新街口</option>
+            <option value="展览路">展览路</option>
+            <option value="月坛">月坛</option>
+            <option value="金融街">金融街</option>
+        </select>
+        <input type="text" id="searchInput" placeholder="搜索幼儿园名称...">
+    </div>
+
+    <div class="kindergarten-grid">
+        <% kindergartens.forEach(function(k) { %>
+            <div class="kindergarten-card" data-type="<%= k.type %>" data-area="<%= k.area %>">
+                <div class="kindergarten-image" style="background-image: url('<%= k.image %>')"></div>
+                <div class="kindergarten-content">
+                    <span class="kindergarten-type"><%= k.type %></span>
+                    <h3 class="kindergarten-title"><%= k.name %></h3>
+                    <div class="kindergarten-info">
+                        <p><i class="fas fa-map-marker-alt"></i> <%= k.area %> - <%= k.address %></p>
+                        <p><i class="fas fa-phone"></i> <%= k.phone %></p>
+                    </div>
+                </div>
+            </div>
+        <% }); %>
+    </div>
+</div>
+
+<style>
+.kindergarten-list {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.filters {
+    margin: 20px 0;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.filters select, .filters input {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: var(--border-radius);
+    min-width: 150px;
+}
+
+.kindergarten-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.kindergarten-card {
+    background: white;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+}
+
+.kindergarten-card:hover {
+    transform: translateY(-5px);
+}
+
+.kindergarten-image {
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+}
+
+.kindergarten-content {
+    padding: 20px;
+}
+
+.kindergarten-type {
+    display: inline-block;
+    padding: 4px 8px;
+    background: var(--primary-color);
+    color: white;
+    border-radius: 4px;
+    font-size: 0.8em;
+    margin-bottom: 10px;
+}
+
+.kindergarten-title {
+    margin: 10px 0;
+    font-size: 1.2em;
+}
+
+.kindergarten-info {
+    color: #666;
+    font-size: 0.9em;
+}
+
+.kindergarten-info i {
+    margin-right: 5px;
+    color: var(--primary-color);
+}
+
+@media (max-width: 768px) {
+    .filters {
+        flex-direction: column;
+    }
+    
+    .filters select, .filters input {
+        width: 100%;
+    }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const grid = document.querySelector('.kindergarten-grid');
+    const typeFilter = document.getElementById('typeFilter');
+    const areaFilter = document.getElementById('areaFilter');
+    const searchInput = document.getElementById('searchInput');
+    const cards = document.querySelectorAll('.kindergarten-card');
+
+    function filterKindergartens() {
+        const type = typeFilter.value;
+        const area = areaFilter.value;
+        const search = searchInput.value.toLowerCase();
+
+        cards.forEach(card => {
+            const cardType = card.dataset.type;
+            const cardArea = card.dataset.area;
+            const cardTitle = card.querySelector('.kindergarten-title').textContent.toLowerCase();
+            const cardAddress = card.querySelector('.kindergarten-info').textContent.toLowerCase();
+
+            const matchesType = type === 'all' || cardType === type;
+            const matchesArea = area === 'all' || cardArea === area;
+            const matchesSearch = cardTitle.includes(search) || cardAddress.includes(search);
+
+            if (matchesType && matchesArea && matchesSearch) {
+                card.style.display = '';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+
+    typeFilter.addEventListener('change', filterKindergartens);
+    areaFilter.addEventListener('change', filterKindergartens);
+    searchInput.addEventListener('input', filterKindergartens);
+});
+</script>
+
+<%- include('partials/footer') %> 

@@ -1,0 +1,68 @@
+@CHARSET "UTF-8";
+.form{
+    width: 100%;
+	min-width:auto;
+}
+.form .box25 {
+    width: 93%;
+    overflow: hidden;
+	margin-right:0px;
+}
+.submitbtu{
+	width: 93%! important;
+}
+.form .box50 {
+    width: 93%;
+    overflow: hidden;
+}
+.form .box100 {
+    overflow: hidden;
+}
+.content {
+    width:100%;
+	min-width:auto;
+}
+.header {
+    width:100%;
+	min-width:auto;
+}
+.footer {
+    width:100%;
+	min-width:auto;
+}
+.logo--header {
+    color: #0FA311;
+    font-size: 22px;
+	font-weight:bold;
+    width: auto;
+    height: 57px;
+    padding-top: 23px;
+}
+.navigation__menu-meta
+{
+	margin-top:30px;
+}
+.navigation__menu-meta .first
+{
+	display:none;
+}
+.textbox
+{
+	padding-left:20px;
+}
+.form h3
+{
+	overflow: hidden;
+	width:93% ! important;
+	text-align:left ! important;
+	padding-bottom:15px ! important;
+}
+input{
+	width:100% ! important;
+}
+#Vcl_IsGuomin,#Vcl_Jh_1_Jiaoyu,#Vcl_Jh_1_Phone,#Vcl_JianhuConnection,#Vcl_JianhuName,#Vcl_ValidCode,#Vcl_IsDibao{
+	margin-bottom:15px;
+}
+#Vcl_Beizhu{
+	width:93%! important;;
+}

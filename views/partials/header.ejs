@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>西城家长 - 您身边的教育资源专家</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav-container">
+            <div class="logo">西城家长</div>
+            <ul class="nav-menu">
+                <li><a href="/" class="<%= typeof currentPage !== 'undefined' && currentPage === 'home' ? 'active' : '' %>">首页</a></li>
+                <li><a href="/kindergarten" class="<%= typeof currentPage !== 'undefined' && currentPage === 'kindergarten' ? 'active' : '' %>">幼儿园</a></li>
+                <li><a href="/primary" class="<%= typeof currentPage !== 'undefined' && currentPage === 'primary' ? 'active' : '' %>">小学</a></li>
+                <li><a href="/middle" class="<%= typeof currentPage !== 'undefined' && currentPage === 'middle' ? 'active' : '' %>">中学</a></li>
+                <li><a href="/resources" class="<%= typeof currentPage !== 'undefined' && currentPage === 'resources' ? 'active' : '' %>">教育资源</a></li>
+                <li><a href="/community" class="<%= typeof currentPage !== 'undefined' && currentPage === 'community' ? 'active' : '' %>">家长社区</a></li>
+                <li><a href="/login" class="<%= typeof currentPage !== 'undefined' && currentPage === 'login' ? 'active' : '' %>">登录/注册</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="main-content"> 
