@@ -4,14 +4,17 @@ FROM node:18-alpine
 # 设置工作目录
 WORKDIR /app
 
-# 设置 npm 配置使用官方仓库
-RUN npm config set registry https://registry.npmjs.org/
+# 设置 npm 配置
+COPY .npmrc ./
+ENV NPM_CONFIG_REGISTRY=https://registry.npmjs.org/
+ENV NPM_CONFIG_STRICT_SSL=false
+ENV NPM_CONFIG_ALWAYS_AUTH=false
 
 # 复制 package.json 和 package-lock.json
 COPY package*.json ./
 
 # 安装依赖
-RUN npm install
+RUN npm install --no-audit --no-fund
 
 # 复制源代码
 COPY . .
