@@ -4,14 +4,17 @@ const session = require('express-session');
 const axios = require('axios');
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 // 配置 session
 app.use(session({
-    secret: 'your-secret-key',
+    secret: process.env.SESSION_SECRET || 'your-secret-key',
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: false } // 开发环境下使用 HTTP
+    cookie: { 
+        secure: process.env.NODE_ENV === 'production',
+        maxAge: 24 * 60 * 60 * 1000 // 24 hours
+    }
 }));
 
 // 解析 JSON 请求体
@@ -129,6 +132,6 @@ app.post('/api/login', (req, res) => {
 });
 
 // 启动服务器
-app.listen(port, () => {
-    console.log(`服务器运行在 http://localhost:${port}`);
+app.listen(port, '0.0.0.0', () => {
+    console.log(`服务器运行在端口 ${port}`);
 }); 
