@@ -1043,7 +1043,7 @@ const kindergartens: Kindergarten[] = [
 ];
 
 router.get('/', (req: express.Request, res: express.Response) => {
-    res.sendFile(path.join(__dirname, '../public/kindergarten.html'));
+    res.sendFile(path.join(__dirname, '../../public/kindergarten.html'));
 });
 
 router.get('/api/kindergartens', (req: express.Request, res: express.Response) => {

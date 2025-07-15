@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>幼儿园 - 西城家长</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2ecc71;
+            --accent-color: #e74c3c;
+            --text-color: #2c3e50;
+            --light-gray: #f5f6fa;
+            --border-radius: 8px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--light-gray);
+        }
+
+        .nav-header {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-menu a:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-menu a.active {
+            color: var(--primary-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 80px auto 0;
+            padding: 20px;
+        }
+
+        .footer {
+            background: white;
+            padding: 40px 20px;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section ul a {
+            text-decoration: none;
+            color: var(--text-color);
+            transition: color 0.3s;
+        }
+
+        .footer-section ul a:hover {
+            color: var(--primary-color);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: var(--primary-color);
+            color: white;
+            text-align: center;
+            line-height: 40px;
+            border-radius: 50%;
+            transition: background 0.3s;
+        }
+
+        .social-links a:hover {
+            background: var(--secondary-color);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            color: var(--primary-color);
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .search-filters {
+            background: white;
+            padding: 20px;
+            border-radius: var(--border-radius);
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-box {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            font-size: 16px;
+        }
+
+        .filter-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 8px 15px;
+            border: 1px solid var(--primary-color);
+            border-radius: var(--border-radius);
+            background: white;
+            color: var(--primary-color);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .filter-btn.active {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .kindergarten-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .kindergarten-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .kindergarten-name {
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .kindergarten-type {
+            display: inline-block;
+            padding: 4px 8px;
+            background: var(--light-gray);
+            border-radius: 4px;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .kindergarten-info {
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .kindergarten-info i {
+            width: 20px;
+            color: var(--primary-color);
+        }
+
+        .demonstration-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            background: var(--secondary-color);
+            color: white;
+            border-radius: 4px;
+            font-size: 14px;
+            margin-left: 10px;
+        }
+
+        .back-home {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--primary-color);
+            color: white;
+            padding: 10px 20px;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+
+            .kindergarten-list {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="nav-header">
+        <div class="nav-container">
+            <a href="/" class="logo">西城家长</a>
+            <nav class="nav-menu">
+                <a href="/">首页</a>
+                <a href="/kindergarten" class="active">幼儿园</a>
+                <a href="/primary">小学</a>
+                <a href="/middle">中学</a>
+                <a href="#about">关于我们</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="header">
+            <h1>西城区幼儿园</h1>
+            <p>为您提供西城区幼儿园的详细信息</p>
+        </div>
+
+        <div class="search-filters">
+            <div class="search-box">
+                <input type="text" class="search-input" placeholder="搜索幼儿园名称、地址..." oninput="filterKindergartens()">
+            </div>
+            <div class="filter-group">
+                <h4 style="width: 100%; margin: 0 0 10px 0; color: var(--text-color);">按类型筛选：</h4>
+                <button class="filter-btn active" data-type="all" onclick="filterByType(this)">全部</button>
+                <button class="filter-btn" data-type="教委办园" onclick="filterByType(this)">教委办园</button>
+                <button class="filter-btn" data-type="部门办园" onclick="filterByType(this)">部门办园</button>
+                <button class="filter-btn" data-type="街道办园" onclick="filterByType(this)">街道办园</button>
+                <button class="filter-btn" data-type="普惠性民办园" onclick="filterByType(this)">普惠性民办园</button>
+                <button class="filter-btn" data-type="非普惠性民办园" onclick="filterByType(this)">非普惠性民办园</button>
+            </div>
+            <div class="filter-group" style="margin-top: 15px;">
+                <h4 style="width: 100%; margin: 0 0 10px 0; color: var(--text-color);">按街道筛选：</h4>
+                <button class="filter-btn active" data-street="all" onclick="filterByStreet(this)">全部街道</button>
+                <button class="filter-btn" data-street="德胜街道" onclick="filterByStreet(this)">德胜街道</button>
+                <button class="filter-btn" data-street="什刹海街道" onclick="filterByStreet(this)">什刹海街道</button>
+                <button class="filter-btn" data-street="西长安街街道" onclick="filterByStreet(this)">西长安街街道</button>
+                <button class="filter-btn" data-street="新街口街道" onclick="filterByStreet(this)">新街口街道</button>
+                <button class="filter-btn" data-street="金融街街道" onclick="filterByStreet(this)">金融街街道</button>
+                <button class="filter-btn" data-street="月坛街道" onclick="filterByStreet(this)">月坛街道</button>
+                <button class="filter-btn" data-street="展览路街道" onclick="filterByStreet(this)">展览路街道</button>
+                <button class="filter-btn" data-street="广内街道" onclick="filterByStreet(this)">广内街道</button>
+                <button class="filter-btn" data-street="牛街街道" onclick="filterByStreet(this)">牛街街道</button>
+                <button class="filter-btn" data-street="白纸坊街道" onclick="filterByStreet(this)">白纸坊街道</button>
+                <button class="filter-btn" data-street="广外街道" onclick="filterByStreet(this)">广外街道</button>
+                <button class="filter-btn" data-street="大栅栏街道" onclick="filterByStreet(this)">大栅栏街道</button>
+                <button class="filter-btn" data-street="天桥街道" onclick="filterByStreet(this)">天桥街道</button>
+                <button class="filter-btn" data-street="椿树街道" onclick="filterByStreet(this)">椿树街道</button>
+                <button class="filter-btn" data-street="陶然亭街道" onclick="filterByStreet(this)">陶然亭街道</button>
+            </div>
+        </div>
+
+        <div class="kindergarten-list" id="kindergartenList">
+            <!-- 幼儿园列表将通过 JavaScript 动态生成 -->
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>关于我们</h4>
+                <ul>
+                    <li><a href="#about">平台介绍</a></li>
+                    <li><a href="#team">团队成员</a></li>
+                    <li><a href="#contact">联系我们</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>教育资源</h4>
+                <ul>
+                    <li><a href="/kindergarten">幼儿园</a></li>
+                    <li><a href="/primary">小学</a></li>
+                    <li><a href="/middle">中学</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>增值服务</h4>
+                <ul>
+                    <li><a href="#vip">VIP会员</a></li>
+                    <li><a href="#consult">一对一咨询</a></li>
+                    <li><a href="#visit">实地探访</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>关注我们</h4>
+                <div class="social-links">
+                    <a href="#wechat"><i class="fab fa-weixin"></i></a>
+                    <a href="#weibo"><i class="fab fa-weibo"></i></a>
+                    <a href="#douyin"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <a href="/" class="back-home">返回首页</a>
+
+    <script>
+        let kindergartens = [];
+        let demonstrationKindergartens = new Set();
+        let currentType = 'all';
+        let currentStreet = 'all';
+        let searchText = '';
+
+        // 获取幼儿园数据
+        fetch('/api/kindergartens')
+            .then(response => response.json())
+            .then(data => {
+                kindergartens = data.kindergartens;
+                demonstrationKindergartens = new Set(data.demonstrationKindergartens);
+                updateStreetCounts();
+                renderKindergartens();
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('获取幼儿园数据失败，请刷新页面重试');
+            });
+
+        // 检查是否为示范园（包含匹配）
+        function isDemonstrationKindergarten(kindergartenName) {
+            return Array.from(demonstrationKindergartens).some(demoName =>
+                kindergartenName.includes(demoName) || demoName.includes(kindergartenName)
+            );
+        }
+
+        // 幼儿园链接映射表（按ID 1-134排序）
+        const kindergartenLinks = {
+  "北京市西城区实验幼儿园": {
+    "intro": "https://yexxcj.xchjw.cn/images/intro/1.pdf",
+    "rules": "https://yexxcj.xchjw.cn/rules.php?id=1"
+  },
+  "北京市西城区虎坊路幼儿园": {
+    "intro": "https://yexxcj.xchjw.cn/images/intro/2.pdf",
+    "rules": "https://yexxcj.xchjw.cn/rules.php?id=2"
+  },
+  "北京市西城区大栅栏西柳树井幼儿园": {
+    "intro": "https://yexxcj.xchjw.cn/images/intro/4.pdf",
+    "rules": "https://yexxcj.xchjw.cn/rules.php?id=4"
+  },
+  "北京市西城区大栅栏大安澜营幼儿园": {
+    "intro": "https://yexxcj.xchjw.cn/images/intro/5.pdf",
+    "rules": "https://yexxcj.xchjw.cn/rules.php?id=5"
+  },
+  "北京市西城区幸福时光陶然幼儿园": {
+    "intro": "https://yexxcj.xchjw.cn/images/intro/6.pdf",
+    "rules": "https://yexxcj.xchjw.cn/rules.php?id=6"
+  },
+  "北京市宣武回民幼儿园": {
+    "intro": "https://yexxcj.xchjw.cn/images/intro/7.pdf",
+    "rules": "https://yexxcj.xchjw.cn/rules.php?id=7"
+  },
+  "北京市西城区三教寺幼儿园": {
+    "intro": "https://yexxcj.xchjw.cn/images/intro/8.pdf",
+    "rules": "https://yexxcj.xchjw.cn/rules.php?id=8"
+  },
+  "北京市第四幼儿园": {
+    "intro": "https://yexxcj.xchjw.cn/images/intro/9.pdf",
+    "rules": "https://yexxcj.xchjw.cn/rules.php?id=9"
+  },
+  "北京市西城区樱桃园幼儿园": {
+    "intro": "https://yexxcj.xchjw.cn/images/intro/10.pdf",
+    "rules": "https://yexxcj.xchjw.cn/rules.php?id=10"
+  },
+  "北京市西城区南菜园幼儿园": {
+    "intro": "https://yexxcj.xchjw.cn/images/intro/11.pdf",
+    "rules": "https://yexxcj.xchjw.cn/rules.php?id=11"
+  },
+  "北京市西城区槐柏幼儿园": {
+    "intro": "https://yexxcj.xchjw.cn/images/intro/14.pdf",
+    "rules": "https://yexxcj.xchjw.cn/rules.php?id=14"
+  },
+  "北京市西城区小百合幼儿园": {
+    "intro": "https://yexxcj.xchjw.cn/images/intro/15.pdf",
+    "rules": "https://yexxcj.xchjw.cn/rules.php?id=15"
+  },
+  "北京市西城区长椿街幼儿园": {
+    "intro": "https://yexxcj.xchjw.cn/images/intro/16.pdf",
+    "rules": "https://yexxcj.xchjw.cn/rules.php?id=16"
+  },
+  "北京市西城区和平门幼儿园": {
+    "intro": "https://yexxcj.xchjw.cn/images/intro/17.pdf",
+    "rules": "https://yexxcj.xchjw.cn/rules.php?id=17"
+  },
+  "北京市机关事务管理局第二幼儿园": {
+    "intro": "https://yexxcj.xchjw.cn/images/intro/18.pdf",
+    "rules": "https://yexxcj.xchjw.cn/rules.php?id=18"
+  },
+  "北京市西城区普林斯顿幼儿园": {
+    "intro": "https://yexxcj.xchjw.cn/images/intro/19.pdf",
+    "rules": "https://yexxcj.xchjw.cn/rules.php?id=19"
+  },
+  "北京市西城区马连道幼儿园": {
+    "intro": "https://yexxcj.xchjw.cn/images/intro/20.pdf",
+    "rules": "https://yexxcj.xchjw.cn/rules.php?id=20"
+  },
+  "北京市西城区名苑幼儿园": {
+    "intro": "https://yexxcj.xchjw.cn/images/intro/21.pdf",
+    "rules": "https://yexxcj.xchjw.cn/rules.php?id=21"
+  },
+  "北京市西城区三义里第一幼儿园": {
+    "intro": "https://yexxcj.xchjw.cn/images/intro/22.pdf",
+    "rules": "https://yexxcj.xchjw.cn/rules.php?id=22"
+  },
+  "北京市西城区三义里第二幼儿园": {
+    "intro": "https://yexxcj.xchjw.cn/images/intro/23.pdf",
+    "rules": "https://yexxcj.xchjw.cn/rules.php?id=23"
+  },
+  "北京市西城区红山幼儿园": {
+    "intro": "https://yexxcj.xchjw.cn/images/intro/24.pdf",
+    "rules": "https://yexxcj.xchjw.cn/rules.php?id=24"
+  },
+  "北京市西城区信和幼儿园": {
+    "intro": "https://yexxcj.xchjw.cn/images/intro/25.pdf",
+    "rules": "https://yexxcj.xchjw.cn/rules.php?id=25"
+  },
+  "北京市金融街惠爱幼儿园": {
+    "intro": "https://yexxcj.xchjw.cn/images/intro/26.pdf",
+    "rules": "https://yexxcj.xchjw.cn/rules.php?id=26"
+  },
+  "国家机关事务管理局花园村幼儿园": {
+    "intro": "https://yexxcj.xchjw.cn/images/intro/27.pdf",
+    "rules": "https://yexxcj.xchjw.cn/rules.php?id=27"
+  },
+  "北京中铁信达经贸有限公司幼儿园": {
+    "intro": "https://yexxcj.xchjw.cn/images/intro/28.pdf",
+    "rules": "https://yexxcj.xchjw.cn/rules.php?id=28"
+  },
+  "北京市西城区汇佳北欧幼儿园": {
+    "intro": "https://yexxcj.xchjw.cn/images/intro/30.pdf",
+    "rules": "https://yexxcj.xchjw.cn/rules.php?id=30"
+  },
+  "北京市西城区蓝色未来幼儿园": {
+    "intro": "https://yexxcj.xchjw.cn/images/intro/31.pdf",
+    "rules": "https://yexxcj.xchjw.cn/rules.php?id=31"
+  },
+  "北京市北海幼儿园": {
+    "intro": "https://yexxcj.xchjw.cn/images/intro/32.pdf",
+    "rules": "https://yexxcj.xchjw.cn/rules.php?id=32"
+  },
+  "北京市西城区棉花胡同幼儿园": {
+    "intro": "https://yexxcj.xchjw.cn/images/intro/33.pdf",
+    "rules": "https://yexxcj.xchjw.cn/rules.php?id=33"
+  },
+  "北京市第六幼儿园": {
+    "intro": "https://yexxcj.xchjw.cn/images/intro/34.pdf",
+    "rules": "https://yexxcj.xchjw.cn/rules.php?id=34"
+  },
+  "北京军区空军蓝天宇锋幼儿园": {
+    "intro": "https://yexxcj.xchjw.cn/images/intro/35.pdf",
+    "rules": "https://yexxcj.xchjw.cn/rules.php?id=35"
+  },
+  "北京市公安局幼儿园": {
+    "intro": "https://yexxcj.xchjw.cn/images/intro/36.pdf",
+    "rules": "https://yexxcj.xchjw.cn/rules.php?id=36"
+  },
+  "中国人民解放军北京卫戍区直属机关幼儿园": {
+    "intro": "https://yexxcj.xchjw.cn/images/intro/37.pdf",
+    "rules": "https://yexxcj.xchjw.cn/rules.php?id=37"
+  },
+  "北京市西城区什刹海街道大拐棒幼儿园": {
+    "intro": "https://yexxcj.xchjw.cn/images/intro/38.pdf",
+    "rules": "https://yexxcj.xchjw.cn/rules.php?id=38"
+  },
+  "北京市西城区洁民幼儿园": {
+    "intro": "https://yexxcj.xchjw.cn/images/intro/39.pdf",
+    "rules": "https://yexxcj.xchjw.cn/rules.php?id=39"
+  },
+  "北京市西城区民族团结幼儿园": {
+    "intro": "https://yexxcj.xchjw.cn/images/intro/40.pdf",
+    "rules": "https://yexxcj.xchjw.cn/rules.php?id=40"
+  },
+  "北京华油服务有限公司幼儿园": {
+    "intro": "https://yexxcj.xchjw.cn/images/intro/41.pdf",
+    "rules": "https://yexxcj.xchjw.cn/rules.php?id=41"
+  },
+  "北京市农业农村局幼儿园": {
+    "intro": "https://yexxcj.xchjw.cn/images/intro/42.pdf",
+    "rules": "https://yexxcj.xchjw.cn/rules.php?id=42"
+  },
+  "实验幼儿园": {
+    "intro": "https://yexxcj.xchjw.cn/images/intro/43.pdf",
+    "rules": "https://yexxcj.xchjw.cn/rules.php?id=43"
+  },
+  "北京市西城区长安幼儿园": {
+    "intro": "https://yexxcj.xchjw.cn/images/intro/44.pdf",
+    "rules": "https://yexxcj.xchjw.cn/rules.php?id=44"
+  },
+  "北京洁如幼儿园": {
+    "intro": "https://yexxcj.xchjw.cn/images/intro/47.pdf",
+    "rules": "https://yexxcj.xchjw.cn/rules.php?id=47"
+  },
+  "新京畿道实验幼儿园": {
+    "intro": "https://yexxcj.xchjw.cn/images/intro/48.pdf",
+    "rules": "https://yexxcj.xchjw.cn/rules.php?id=48"
+  },
+  "公安部幼儿园": {
+    "intro": "https://yexxcj.xchjw.cn/images/intro/49.pdf",
+    "rules": "https://yexxcj.xchjw.cn/rules.php?id=49"
+  },
+  "国家发展和改革委员会三里河幼儿园": {
+    "intro": "https://yexxcj.xchjw.cn/images/intro/50.pdf",
+    "rules": "https://yexxcj.xchjw.cn/rules.php?id=50"
+  },
+  "北京市西城区月坛街道办事处第一幼儿园": {
+    "intro": "https://yexxcj.xchjw.cn/images/intro/51.pdf",
+    "rules": "https://yexxcj.xchjw.cn/rules.php?id=51"
+  },
+  "展览路幼儿园": {
+    "intro": "https://yexxcj.xchjw.cn/images/intro/53.pdf",
+    "rules": "https://yexxcj.xchjw.cn/rules.php?id=53"
+  },
+  "物资机关幼儿园": {
+    "intro": "https://yexxcj.xchjw.cn/images/intro/54.pdf",
+    "rules": "https://yexxcj.xchjw.cn/rules.php?id=54"
+  },
+  "中国人民解放军新闻传播中心幼儿园": {
+    "intro": "https://yexxcj.xchjw.cn/images/intro/55.pdf",
+    "rules": "https://yexxcj.xchjw.cn/rules.php?id=55"
+  },
+  "北京市西城区展览路街道北营幼儿园": {
+    "intro": "https://yexxcj.xchjw.cn/images/intro/56.pdf",
+    "rules": "https://yexxcj.xchjw.cn/rules.php?id=56"
+  },
+  "北京市西城区曙光幼儿园": {
+    "intro": "https://yexxcj.xchjw.cn/images/intro/58.pdf",
+    "rules": "https://yexxcj.xchjw.cn/rules.php?id=58"
+  },
+  "北京市西城区西四北幼儿园": {
+    "intro": "https://yexxcj.xchjw.cn/images/intro/59.pdf",
+    "rules": "https://yexxcj.xchjw.cn/rules.php?id=59"
+  },
+  "中国儿童中心实验幼儿园": {
+    "intro": "https://yexxcj.xchjw.cn/images/intro/60.pdf",
+    "rules": "https://yexxcj.xchjw.cn/rules.php?id=60"
+  },
+  "果子市幼儿园": {
+    "intro": "https://yexxcj.xchjw.cn/images/intro/61.pdf",
+    "rules": "https://yexxcj.xchjw.cn/rules.php?id=61"
+  },
+  "高井幼儿园": {
+    "intro": "https://yexxcj.xchjw.cn/images/intro/62.pdf",
+    "rules": "https://yexxcj.xchjw.cn/rules.php?id=62"
+  },
+  "北京市西城区广电银河艺术幼儿园": {
+    "intro": "https://yexxcj.xchjw.cn/images/intro/63.pdf",
+    "rules": "https://yexxcj.xchjw.cn/rules.php?id=63"
+  },
+  "北京市西城区幸福泉幼儿园": {
+    "intro": "https://yexxcj.xchjw.cn/images/intro/64.pdf",
+    "rules": "https://yexxcj.xchjw.cn/rules.php?id=64"
+  },
+  "北京市西城区悠米幼儿园": {
+    "intro": "https://yexxcj.xchjw.cn/images/intro/68.pdf",
+    "rules": "https://yexxcj.xchjw.cn/rules.php?id=68"
+  },
+  "北京市西城区亲育代幼儿园": {
+    "intro": "https://yexxcj.xchjw.cn/images/intro/102.pdf",
+    "rules": "https://yexxcj.xchjw.cn/rules.php?id=102"
+  },
+  "北京市西城区盛鸿天使幼儿园": {
+    "intro": "https://yexxcj.xchjw.cn/images/intro/103.pdf",
+    "rules": "https://yexxcj.xchjw.cn/rules.php?id=103"
+  },
+  "北京市西城区广安幼儿园": {
+    "intro": "https://yexxcj.xchjw.cn/images/intro/104.pdf",
+    "rules": "https://yexxcj.xchjw.cn/rules.php?id=104"
+  },
+  "北京市西城区红黄蓝幼儿园": {
+    "intro": "https://yexxcj.xchjw.cn/images/intro/111.pdf",
+    "rules": "https://yexxcj.xchjw.cn/rules.php?id=111"
+  },
+  "北京市西城区乐百灵幼儿园": {
+    "intro": "https://yexxcj.xchjw.cn/images/intro/112.pdf",
+    "rules": "https://yexxcj.xchjw.cn/rules.php?id=112"
+  },
+  "北京市西城区松树阳光幼儿园": {
+    "intro": "https://yexxcj.xchjw.cn/images/intro/113.pdf",
+    "rules": "https://yexxcj.xchjw.cn/rules.php?id=113"
+  },
+  "北京博雅汇英幼儿园": {
+    "intro": "https://yexxcj.xchjw.cn/images/intro/114.pdf",
+    "rules": "https://yexxcj.xchjw.cn/rules.php?id=114"
+  },
+  "北京市西城区美仁幼儿园": {
+    "intro": "https://yexxcj.xchjw.cn/images/intro/115.pdf",
+    "rules": "https://yexxcj.xchjw.cn/rules.php?id=115"
+  },
+  "北京市西城区爱知湶幼儿园": {
+    "intro": "https://yexxcj.xchjw.cn/images/intro/116.pdf",
+    "rules": "https://yexxcj.xchjw.cn/rules.php?id=116"
+  },
+  "北京市金色启蒙幼儿园": {
+    "intro": "https://yexxcj.xchjw.cn/images/intro/118.pdf",
+    "rules": "https://yexxcj.xchjw.cn/rules.php?id=118"
+  },
+  "北京市西城区育民五一幼儿园": {
+    "intro": "https://yexxcj.xchjw.cn/images/intro/119.pdf",
+    "rules": "https://yexxcj.xchjw.cn/rules.php?id=119"
+  },
+  "北京市第十五中学附属陶然亭幼儿园": {
+    "intro": "https://yexxcj.xchjw.cn/images/intro/120.pdf",
+    "rules": "https://yexxcj.xchjw.cn/rules.php?id=120"
+  },
+  "北京市西城区教育研修学院附属幼儿园": {
+    "intro": "https://yexxcj.xchjw.cn/images/intro/121.pdf",
+    "rules": "https://yexxcj.xchjw.cn/rules.php?id=121"
+  },
+  "北京市西城区大栅栏幼儿园": {
+    "intro": "https://yexxcj.xchjw.cn/images/intro/122.pdf",
+    "rules": "https://yexxcj.xchjw.cn/rules.php?id=122"
+  },
+  "属非普惠性民办幼儿园": {
+    "intro": "https://yexxcj.xchjw.cn/images/intro/123.pdf",
+    "rules": "https://yexxcj.xchjw.cn/rules.php?id=123"
+  },
+  "北京永远的孩子幼儿园": {
+    "intro": "https://yexxcj.xchjw.cn/images/intro/124.pdf",
+    "rules": "https://yexxcj.xchjw.cn/rules.php?id=124"
+  },
+  "北京市比泡乐儿幼儿园": {
+    "intro": "https://yexxcj.xchjw.cn/images/intro/125.pdf",
+    "rules": "https://yexxcj.xchjw.cn/rules.php?id=125"
+  },
+  "北京市金融街惠泽幼儿园": {
+    "intro": "https://yexxcj.xchjw.cn/images/intro/127.pdf",
+    "rules": "https://yexxcj.xchjw.cn/rules.php?id=127"
+  },
+  "北京德胜盛德幼儿园": {
+    "intro": "https://yexxcj.xchjw.cn/images/intro/128.pdf",
+    "rules": "https://yexxcj.xchjw.cn/rules.php?id=128"
+  },
+  "北京市西城区嘉泊幼儿园": {
+    "intro": "https://yexxcj.xchjw.cn/images/intro/129.pdf",
+    "rules": "https://yexxcj.xchjw.cn/rules.php?id=129"
+  },
+  "北京启喑实验学校附属幼儿园": {
+    "intro": "https://yexxcj.xchjw.cn/images/intro/130.pdf",
+    "rules": "https://yexxcj.xchjw.cn/rules.php?id=130"
+  },
+  "财政部幼儿园": {
+    "intro": "https://yexxcj.xchjw.cn/images/intro/131.pdf",
+    "rules": "https://yexxcj.xchjw.cn/rules.php?id=131"
+  },
+  "北京市铁路第二中学附属幼儿园": {
+    "intro": "https://yexxcj.xchjw.cn/images/intro/132.pdf",
+    "rules": "https://yexxcj.xchjw.cn/rules.php?id=132"
+  },
+  "北京市西城区蓝天逸景幼儿园": {
+    "intro": "https://yexxcj.xchjw.cn/images/intro/133.pdf",
+    "rules": "https://yexxcj.xchjw.cn/rules.php?id=133"
+  },
+  "北京市西城区博智幼儿园": {
+    "intro": "https://yexxcj.xchjw.cn/images/intro/134.pdf",
+    "rules": "https://yexxcj.xchjw.cn/rules.php?id=134"
+  },
+  "北京市西城区梧桐花语幼儿园": {
+    "intro": "https://yexxcj.xchjw.cn/images/intro/135.pdf",
+    "rules": "https://yexxcj.xchjw.cn/rules.php?id=135"
+  },
+  "目标落实到幼儿园": {
+    "intro": "https://yexxcj.xchjw.cn/images/intro/137.pdf",
+    "rules": "https://yexxcj.xchjw.cn/rules.php?id=137"
+  },
+  "附属实验幼儿园": {
+    "intro": "https://yexxcj.xchjw.cn/images/intro/138.pdf",
+    "rules": "https://yexxcj.xchjw.cn/rules.php?id=138"
+  },
+  "北京市西城区培正幼儿园": {
+    "intro": "https://yexxcj.xchjw.cn/images/intro/139.pdf",
+    "rules": "https://yexxcj.xchjw.cn/rules.php?id=139"
+  }
+};
+
+        // 获取幼儿园链接信息
+        function getKindergartenLinks(kindergartenName) {
+            // 尝试精确匹配
+            if (kindergartenLinks[kindergartenName]) {
+                return kindergartenLinks[kindergartenName];
+            }
+
+            // 尝试部分匹配（去掉分园后缀）
+            const baseName = kindergartenName.replace(/\(.*?\)$/, '');
+            if (kindergartenLinks[baseName]) {
+                return kindergartenLinks[baseName];
+            }
+
+            // 尝试包含匹配
+            for (const [linkName, links] of Object.entries(kindergartenLinks)) {
+                if (kindergartenName.includes(linkName) || linkName.includes(baseName)) {
+                    return links;
+                }
+            }
+
+            return null;
+        }
+
+        // 更新街道按钮显示数量
+        function updateStreetCounts() {
+            const streetCounts = {};
+
+            // 统计每个街道的幼儿园数量
+            kindergartens.forEach(k => {
+                streetCounts[k.street] = (streetCounts[k.street] || 0) + 1;
+            });
+
+            // 更新街道按钮文本
+            document.querySelectorAll('[data-street]').forEach(btn => {
+                const street = btn.dataset.street;
+                if (street !== 'all') {
+                    const count = streetCounts[street] || 0;
+                    const originalText = btn.textContent.split('(')[0]; // 移除已有的数量显示
+                    btn.textContent = `${originalText}(${count})`;
+                }
+            });
+        }
+
+        function filterByType(button) {
+            // 更新类型过滤按钮状态
+            document.querySelectorAll('[data-type]').forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+
+            currentType = button.dataset.type;
+            renderKindergartens();
+        }
+
+        function filterByStreet(button) {
+            // 更新街道过滤按钮状态
+            document.querySelectorAll('[data-street]').forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+
+            currentStreet = button.dataset.street;
+            renderKindergartens();
+        }
+
+        function filterKindergartens() {
+            searchText = document.querySelector('.search-input').value.toLowerCase();
+            renderKindergartens();
+        }
+
+        function renderKindergartens() {
+            const filteredKindergartens = kindergartens.filter(k => {
+                const matchesType = currentType === 'all' || k.type === currentType;
+                const matchesStreet = currentStreet === 'all' || k.street === currentStreet;
+                const matchesSearch = searchText === '' ||
+                    k.name.toLowerCase().includes(searchText) ||
+                    k.address.toLowerCase().includes(searchText) ||
+                    k.street.toLowerCase().includes(searchText);
+                return matchesType && matchesStreet && matchesSearch;
+            });
+
+            const listElement = document.getElementById('kindergartenList');
+            listElement.innerHTML = filteredKindergartens.map((k, index) => `
+                <div class="kindergarten-card">
+                    <div class="kindergarten-name">
+                        <span style="color: #95a5a6; font-weight: normal; margin-right: 8px;">${index + 1}.</span>
+                        ${isDemonstrationKindergarten(k.name) ?
+                    '<i class="fas fa-star" style="color: #f39c12; margin-right: 5px;"></i>' : ''}
+                        ${k.name}
+                        ${isDemonstrationKindergarten(k.name) ?
+                    '<span class="demonstration-badge">示范园</span>' : ''}
+                    </div>
+                    <div class="kindergarten-type">${k.type}</div>
+                    <div class="kindergarten-info">
+                        <i class="fas fa-map-marker-alt"></i> ${k.street}
+                    </div>
+                    <div class="kindergarten-info">
+                        <i class="fas fa-location-dot"></i> ${k.address}
+                    </div>
+                    <div class="kindergarten-info">
+                        <i class="fas fa-phone"></i> ${k.phone}
+                    </div>
+                    <div class="kindergarten-info">
+                        <i class="fas fa-clock"></i> ${k.time}
+                    </div>
+                    ${(() => {
+                    const links = getKindergartenLinks(k.name);
+                    if (links) {
+                        return `
+                            <div class="kindergarten-info" style="margin-top: 10px; padding-top: 10px; border-top: 1px solid #eee;">
+                                <a href="${links.intro}" target="_blank" style="color: var(--primary-color); text-decoration: none; margin-right: 15px;">
+                                    <i class="fas fa-file-pdf"></i> 园所简介
+                                </a>
+                                <a href="${links.rules}" target="_blank" style="color: var(--secondary-color); text-decoration: none;">
+                                    <i class="fas fa-bullhorn"></i> 招生公告
+                                </a>
+                            </div>`;
+                    }
+                    return '';
+                })()}
+                </div>
+            `).join('');
+        }
+    </script>
+</body>
+
+</html>

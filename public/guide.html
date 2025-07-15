@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -26,16 +27,120 @@
             line-height: 1.6;
             color: var(--text-color);
             background-color: var(--light-gray);
-            padding: 20px;
+        }
+
+        .nav-header {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-menu a:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-menu a.active {
+            color: var(--primary-color);
         }
 
         .container {
             max-width: 1000px;
-            margin: 0 auto;
+            margin: 80px auto 0;
             background: white;
             padding: 40px;
             border-radius: var(--border-radius);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .footer {
+            background: white;
+            padding: 40px 20px;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section ul a {
+            text-decoration: none;
+            color: var(--text-color);
+            transition: color 0.3s;
+        }
+
+        .footer-section ul a:hover {
+            color: var(--primary-color);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: var(--primary-color);
+            color: white;
+            text-align: center;
+            line-height: 40px;
+            border-radius: 50%;
+            transition: background 0.3s;
+        }
+
+        .social-links a:hover {
+            background: var(--secondary-color);
         }
 
         h1 {
@@ -61,7 +166,7 @@
             margin: 20px 0;
             background: white;
             border-left: 4px solid var(--primary-color);
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
         .important-dates {
@@ -114,18 +219,34 @@
             background: #2980b9;
         }
 
-        .download-link, .kindergarten-link {
+        .download-link,
+        .kindergarten-link {
             color: var(--primary-color);
             text-decoration: none;
             font-weight: bold;
         }
 
-        .download-link:hover, .kindergarten-link:hover {
+        .download-link:hover,
+        .kindergarten-link:hover {
             text-decoration: underline;
         }
     </style>
 </head>
+
 <body>
+    <header class="nav-header">
+        <div class="nav-container">
+            <a href="/" class="logo">西城家长</a>
+            <nav class="nav-menu">
+                <a href="/">首页</a>
+                <a href="/kindergarten">幼儿园</a>
+                <a href="/primary">小学</a>
+                <a href="/middle">中学</a>
+                <a href="#about">关于我们</a>
+            </nav>
+        </div>
+    </header>
+
     <div class="container">
         <h1>2025年西城区幼儿园入园全攻略</h1>
 
@@ -156,7 +277,8 @@
                     - 登录平台进行幼儿信息采集<br>
                     - 填写基本信息（姓名、证件类型、证件号、性别等）<br>
                     - 系统将自动以证件号码作为用户名<br>
-                    - <a href="信息采集表模板.html" target="_blank" class="download-link"><i class="fas fa-download"></i> 下载信息采集表模板</a><br>
+                    - <a href="/form-template.html" target="_blank" class="download-link"><i class="fas fa-download"></i>
+                        下载信息采集表模板</a><br>
                     - <strong>注意：</strong>请仔细核对所有信息，确保与证件信息一致
                 </p>
             </div>
@@ -168,7 +290,8 @@
                 <h3>第四步：选择意向幼儿园</h3>
                 <p>
                     - 可按志愿顺序选择1-5所幼儿园<br>
-                    - <a href="youeryuan25.html" target="_blank" class="kindergarten-link"><i class="fas fa-school"></i> 查看西城区幼儿园名录</a><br>
+                    - <a href="/kindergarten" target="_blank" class="kindergarten-link"><i class="fas fa-school"></i>
+                        查看西城区幼儿园名录</a><br>
                     - 建议选择居住地附近的幼儿园<br>
                     - 查看幼儿园的具体招生要求和办园特色<br>
                     - 合理分配志愿，提高录取机会
@@ -177,8 +300,8 @@
             <div class="timeline-item">
                 <h3>第五步：等待审核和录取</h3>
                 <p>- 幼儿园接收并审核报名材料<br>
-                - 在指定时间查询预录取结果<br>
-                - 通过体检后获得正式录取通知</p>
+                    - 在指定时间查询预录取结果<br>
+                    - 通过体检后获得正式录取通知</p>
             </div>
         </div>
 
@@ -197,7 +320,7 @@
                     <li>✓ 非普惠性民办园</li>
                 </ul>
                 <p style="margin-top: 15px;">
-                    <a href="youeryuan25.html" target="_blank" style="color: var(--primary-color);">
+                    <a href="/kindergarten" target="_blank" style="color: var(--primary-color);">
                         查看完整幼儿园列表和详细信息 →
                     </a>
                 </p>
@@ -236,7 +359,45 @@
             <li>预录取结果查询后需及时确认，并准备体检相关事宜</li>
         </ul>
 
-        <a href="index.html" class="back-button">返回首页</a>
+        <a href="/" class="back-button">返回首页</a>
     </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>关于我们</h4>
+                <ul>
+                    <li><a href="#about">平台介绍</a></li>
+                    <li><a href="#team">团队成员</a></li>
+                    <li><a href="#contact">联系我们</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>教育资源</h4>
+                <ul>
+                    <li><a href="/kindergarten">幼儿园</a></li>
+                    <li><a href="/primary">小学</a></li>
+                    <li><a href="/middle">中学</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>增值服务</h4>
+                <ul>
+                    <li><a href="#vip">VIP会员</a></li>
+                    <li><a href="#consult">一对一咨询</a></li>
+                    <li><a href="#visit">实地探访</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>关注我们</h4>
+                <div class="social-links">
+                    <a href="#wechat"><i class="fab fa-weixin"></i></a>
+                    <a href="#weibo"><i class="fab fa-weibo"></i></a>
+                    <a href="#douyin"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
 </body>
-</html> 
+
+</html>
